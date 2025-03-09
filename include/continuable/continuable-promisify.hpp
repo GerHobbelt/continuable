@@ -78,7 +78,7 @@ public:
   /// \since  3.0.0
   template <typename Callable, typename... Args>
   static auto from(Callable&& callable, Args&&... args) {
-    return helper::template from(detail::convert::default_resolver(),
+    return helper::template from<Callable, Args...>(detail::convert::default_resolver(),
                                  std::forward<Callable>(callable),
                                  std::forward<Args>(args)...);
   }
@@ -109,7 +109,7 @@ public:
   /// \since 4.0.0
   template <typename Resolver, typename Callable, typename... Args>
   static auto with(Resolver&& resolver, Callable&& callable, Args&&... args) {
-    return helper::template from(std::forward<Resolver>(resolver),
+    return helper::template from<Resolver, Callable, Args...>(std::forward<Resolver>(resolver),
                                  std::forward<Callable>(callable),
                                  std::forward<Args>(args)...);
   }
